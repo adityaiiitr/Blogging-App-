@@ -13,3 +13,6 @@
 > inside pages folder the sequences of folder determine
     the routing automatically using next js
 > npm i antd @ant-design/icons
+
+> Using MVC Architecture
+    context - to store global accessible variables
