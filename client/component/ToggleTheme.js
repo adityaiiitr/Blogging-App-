@@ -29,7 +29,7 @@ const ToggleTheme = ()=>{
         </div>
         
         
-            <div>{theme}</div>
+            {/* <div>{theme}</div> */}
         </>
     )
 }

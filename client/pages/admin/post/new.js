@@ -1,16 +1,16 @@
 import { Layout } from 'antd'
-import AdminLayout from '../../component/layout/AdminLayout';
+import AdminLayout from '../../../component/layout/AdminLayout';
 
 const {Content,Sider} = Layout
-function Admin (){
+function NewPosts (){
     return (
 
      <AdminLayout>
-        <h1>this is adimin page props</h1>
+        <h1>NEW POSTS</h1>
         <p>this is affed judt to check</p>
      </AdminLayout>
         
     );
 }
 
-export default Admin;
+export default NewPosts;

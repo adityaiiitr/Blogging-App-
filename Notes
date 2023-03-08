@@ -1,8 +1,10 @@
 > inside client npm init -y
 > npm install next react react-dom
+
     npm i antd@4.19.2 react@17.0.2 react-dom@17.0.2 next@12.1.0
 
 > paste this in package.json
+
     "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,8 +13,77 @@
     }
 
 > inside pages folder the sequences of folder determine
+
     the routing automatically using next js
+
 > npm i antd @ant-design/icons
 
 > Using MVC Architecture
+
     context - to store global accessible variables
+
+> public folder - to store any kind of static data like images and static page css
+
+> No Loading { Link } tag
+
+    (react-router-dom) alternative is there in next
+    import Link from 'next/link'
+
+> No destructuring here
+
+> adding link there is need of anchor tag also
+
+        <Menu.Item key="setting:2">
+
+            <Link href="/admin">
+                <a>Admin</a>
+            </Link>
+
+        </Menu.Item>
+
+> In TopNAv line 63
+> {/_ we don't need to apply margin here its already applied above so it will be alligned _/}
+
+      {/* <Menu.Item style={{marginLeft:"auto"}}> */}
+        {/* <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+          Navigation Four - Link
+        </a> */}
+
+
+> Props destructuring
+
+    function AdminLayout(props){
+        return (
+
+            <Layout>
+
+                <Sider>SideBar</Sider>
+                <Layout>
+                <Content>{props.children}</Content>
+                </Layout>
+            </Layout>
+
+        );
+    }
+
+BETTER WAY AHEAD
+function AdminLayout({children}){
+return (
+
+            <Layout>
+
+                <Sider>SideBar</Sider>
+                <Layout>
+                <Content>{children}</Content>
+                </Layout>
+            </Layout>
+
+        );
+    }
+
+> useEffect is used to display on which page you are that is text highlightiong in adminnav.js
+
+> nextjs works in both environment so check in which you are
+> process.browser // brwoser environment
+> process.server // server environment
+> theme="dark" = it darkens the navbar more provided by antdesign
