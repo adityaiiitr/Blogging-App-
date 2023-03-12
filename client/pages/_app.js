@@ -1,16 +1,21 @@
-// import 'antd/dist/antd.css'
-import {ThemeProvider} from "../context/theme"
-// import "antd/dist/antd.dark.css"
-import TopNav from "../component/TopNav"
+import { ThemeProvider } from "../context/theme";
+import { AuthProvider } from "../context/auth";
+// import "antd/dist/antd.css";
+// import "antd/dist/antd.dark.css";
+import TopNav from "../component/TopNav";
+import "../public/css/styles.css";
+import { Toaster } from "react-hot-toast";
 
-function MyApp({Component,pageProps}){
-    return (
-
-        <ThemeProvider>
-            <TopNav/>
-            <Component {...pageProps}/>
-        </ThemeProvider>
-    )
+function MyApp({ Component, pageProps }) {
+  return (
+    <ThemeProvider>
+      <AuthProvider>
+        <TopNav />
+        <Toaster />
+        <Component {...pageProps} />
+      </AuthProvider>
+    </ThemeProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

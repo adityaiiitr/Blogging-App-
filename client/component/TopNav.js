@@ -1,22 +1,20 @@
-import { useState } from "react"; //inside fuctional component
-// no need of class component
+import { useState } from "react";
 import { Menu } from "antd";
 import {
   MailOutlined,
   AppstoreOutlined,
   SettingOutlined,
   UserAddOutlined,
-  UserOutlined
-
+  UserOutlined,
+  LogoutOutlined 
 } from "@ant-design/icons";
-
 import ToggleTheme from "./ToggleTheme";
+import Link from "next/link";
 
-// NO Loading { Link } tag (react-router-dom) alternative is there in next
-import Link from 'next/link'
-//No destructuring here
- 
-
+// importing for signout
+import { AuthContext } from '../context/auth'
+import { useContext } from "react";
+import { useRouter } from 'next/router'
 
 const { SubMenu } = Menu;
 
@@ -28,48 +26,76 @@ const TopNav = () => {
     setCurrent(e.key);
   };
 
+  const [auth,setAuth] = useContext(AuthContext)
+  const router = useRouter()
+  const signOut =()=>{
+    //remove from local storage 
+    localStorage.removeItem("auth")
+    
+    //remove from context 
+    setAuth({
+      user:null,
+      token:""
+    })
+    // redirect to login 
+   
+    router.push("/signin")
+
+
+  }
+
   return (
-    <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" theme="dark">
+    <Menu
+      onClick={handleClick}
+      selectedKeys={[current]}
+      mode="horizontal"
+      theme="dark"
+    >
       <Menu.Item key="mail" icon={<MailOutlined />}>
         <Link href="/">
-            <a>CMS</a>
+          <a>CMS</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="signup" icon={<UserAddOutlined />}>
-      <Link href="/signup">
-            <a>SignUp</a>
-        </Link>
-      </Menu.Item>
-      <Menu.Item key="signin" icon={<UserOutlined />}>
-      <Link href="/signin">
-            <a>SignIn</a>
-        </Link>
-      </Menu.Item>
-      <SubMenu
+      {auth && auth.user===null &&(<>
+        <Menu.Item key="signup" icon={<UserAddOutlined />} style={{ marginLeft: "auto" }}>
+          <Link href="/signup">
+            <a>Signup</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="signin" icon={<UserOutlined />}>
+          <Link href="/signin">
+            <a>Signin</a>
+          </Link>
+        </Menu.Item>
+      </>
+      )}
+      
+      
+
+
+      {auth?.user!==null && (<><SubMenu
         key="SubMenu"
         icon={<SettingOutlined />}
         title="Dashboard"
-        style={{marginLeft:"auto"}}
+        style={{ marginLeft: "auto" }}
       >
         <Menu.ItemGroup title="Management">
-
           <Menu.Item key="setting:2">
             <Link href="/admin">
-                <a>Admin</a>
+              <a>Admin</a>
             </Link>
-            
           </Menu.Item>
         </Menu.ItemGroup>
-        
       </SubMenu>
-      {/* we don't need to apply margin here its already applied above so it will be alligned */}
-      
-      {/* <Menu.Item style={{marginLeft:"auto"}}> */}
-        {/* <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-          Navigation Four - Link
-        </a> */}
+      <Menu.Item key="signout" icon={<LogoutOutlined />} onClick={()=>{signOut()}}>
+      <Link href="/signin">
+        <a>Sign Out</a>
+      </Link>
+    </Menu.Item>
+    </>
+      )}
       <Menu.Item>
-        <ToggleTheme/>
+        <ToggleTheme />
       </Menu.Item>
     </Menu>
   );

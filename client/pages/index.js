@@ -1,15 +1,18 @@
-import {Button} from 'antd'
-import ToggleTheme from '../component/ToggleTheme';
+import { useContext } from "react";
+import { AuthContext } from "../context/auth";
 
-function Home(){
+function Home() {
+  // context
+  const [auth, setAuth] = useContext(AuthContext);
 
-    return (
-        <>
-            <h1>Home</h1>
-            <Button type="primary">click me</Button>
+  return (
+    <div>
+      <h1>Home</h1>
 
-        </>
-    );
+      <br />
+      <pre>{JSON.stringify(auth, null, 4)}</pre>
+    </div>
+  );
 }
 
 export default Home;

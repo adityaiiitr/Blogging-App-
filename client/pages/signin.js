@@ -1,10 +1,44 @@
+import { useState, useContext } from "react";
 import { Form, Input, Button, Checkbox, Col, Row } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { AuthContext } from "../context/auth";
+import { useRouter } from "next/router";
 
 function Signin() {
-  const onFinish = (values) => {
-    console.log("values => ", values);
+  // context
+  const [auth, setAuth] = useContext(AuthContext);
+  // state
+  const [loading, setLoading] = useState(false);
+  // hooks
+  const router = useRouter();
+
+  const onFinish = async (values) => {
+    // console.log("values => ", values);
+    const { data } = await axios.post("/signin", values);
+      // console.log("signin response => ", data);
+    try {
+      if (data?.error) {
+        toast.error(data.error);
+        setLoading(false);
+      } else {
+      setLoading(true);
+      
+      // save user and token to context
+      setAuth(data);
+      // save user and token to local storage
+      localStorage.setItem("auth", JSON.stringify(data));
+      toast.success("Successfully signed in");
+      // redirect user
+      router.push("/");
+      }
+    } catch (err) {
+      console.log("err => ", err);
+      setLoading(false);
+      toast.error("Signin failed. Try again.");
+    }
   };
 
   return (
@@ -15,7 +49,7 @@ function Signin() {
         <Form
           name="normal_login"
           className="login-form"
-          initialValues={{ remember: true }}
+          initialValues={{ remember: true, email:"user@mail.com", password:"userpassword" }}
           onFinish={onFinish}
         >
           {/* email */}

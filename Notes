@@ -49,7 +49,6 @@
           Navigation Four - Link
         </a> */}
 
-
 > Props destructuring
 
     function AdminLayout(props){
@@ -87,3 +86,38 @@ return (
 > process.browser // brwoser environment
 > process.server // server environment
 > theme="dark" = it darkens the navbar more provided by antdesign
+
+> Backend authentication using npm package kaloraat
+> npm i -g kaloraat
+> "esm": "^3.2.25", using this package we can use es6 without require in package.json in backend
+> sendgrid for sending forget email address
+> in production we use other package instead of nodemon till then npm install nodemon inside server folder
+
+> axios(http client) is used to send the values to the backend (Read Axios Github Documentation) or you can use the fetch method
+> on successful login a message is sjown to the users using the package react-hot-toast
+
+> data?.error or data && data.error
+
+> create .env.local for setting the domains setup
+> API=http://localhost:8000/api # this is accesible in server side only
+> NEXT*PUBLIC_API=http://localhost:8000/api # this bariable is accesible in client side server (NEXT_PUBLIC*)
+
+> Signout
+> const [auth,setAuth] = useContext(AuthContext)
+> const signOut =()=>{
+
+    //remove from local storage
+    localStorage.removeItem("auth")
+
+    //remove from context
+    setAuth({
+      user:null,
+      token:""
+    })
+    // redirect to login
+    Router.push("/signin")
+
+}
+
+> Conditinal Rendering
+> auth && auth.user===null or auth?.user ===null
