@@ -9,6 +9,7 @@ require('dotenv').config()
 // const DATABASE = "mongodb://localhost:27017/cms";
 
 import authRoutes from "./routes/auth";
+import categoryRoutes from "./routes/category";
 
 const morgan = require("morgan");
 
@@ -29,5 +30,6 @@ app.use(morgan("dev"));
 
 // route middlewares
 app.use("/api", authRoutes);
+app.use("/api", categoryRoutes);
 
 app.listen(8000, () => console.log("Server running on port 8000"));

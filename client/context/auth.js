@@ -14,8 +14,12 @@ const AuthProvider = ({ children }) => {
   // config axios
   if (process.server) {
     axios.defaults.baseURL = process.env.API;
+    // Sending data in the form of Headers from Frontend
+    axios.defaults.headers.common["Authorization"] = `Bearer ${auth?.token}`
   } else {
     axios.defaults.baseURL = process.env.NEXT_PUBLIC_API;
+    // Sending data in the form of Headers from Frontend
+    axios.defaults.headers.common["Authorization"] = `Bearer ${auth?.token}`
   }
 
   useEffect(() => {

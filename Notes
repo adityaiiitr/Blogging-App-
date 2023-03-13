@@ -121,3 +121,18 @@ return (
 
 > Conditinal Rendering
 > auth && auth.user===null or auth?.user ===null
+
+> routes parameter structure
+> router.post("/category",
+> // (req,res,next)=>{
+> // console.log("Perform a check to make sure user is admin")
+> // console.log("Headers ",req.headers)
+> // return res.status(401).send("Unauthorised")
+> // // next();
+> // },
+> requireSignin,
+> isAdmin,
+> createCategory);
+
+> Securing Routes
+> Securing Pages for different user roles =- before rendering layout just check user roles and then redirect based the user based on the user specific pages like author subscriber or admin (AdminLayout.js)

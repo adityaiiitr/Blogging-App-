@@ -1,4 +1,4 @@
-const User = require("../models/user");
+import User from '../models/user'
 const jwt = require("jsonwebtoken");
 const { hashPassword, comparePassword } = require("../helpers/auth");
 const nanoid = require("nanoid");
