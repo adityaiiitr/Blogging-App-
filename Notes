@@ -136,3 +136,42 @@ return (
 
 > Securing Routes
 > Securing Pages for different user roles =- before rendering layout just check user roles and then redirect based the user based on the user specific pages like author subscriber or admin (AdminLayout.js)
+>
+> > using local storage not a secure option
+> > const [auth,setAuth] = useContext(AuthContext)
+
+    const router = useRouter()
+      useEffect(()=>{
+        if(auth?.user?.role !== 'Admin')
+        router.push('/')
+
+      },[auth])
+
+      it shows the page for brief sec so we can use here useState to show a loading spinner or loader
+
+> middleware stuff for auth in server
+> import User from "../models/user";
+> import expressJwt from "express-jwt";
+> require("dotenv").config();
+
+// req.user = \_id
+// here we are checking that does the user require sign in or not
+export const requireSignin = expressJwt({
+secret: process.env.JWT_SECRET,
+algorithms: ["HS256"],
+});
+
+// here we are checking that user role is admin or subscriber
+
+export const isAdmin = async (req, res, next) => {
+try {
+const user = await User.findById(req.user.\_id);
+if (user.role !== "Admin") {
+return res.status(403).send("Unauhorized");
+} else {
+next();
+}
+} catch (err) {
+console.log(err);
+}
+};

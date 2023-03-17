@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Form, Input, Button, Checkbox, Col, Row } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import Link from "next/link";
@@ -41,6 +41,12 @@ function Signup() {
       setLoading(false);
     }
   };
+
+  useEffect(()=>{
+    if(auth?.token){
+      router.push('/')
+    }
+  },[auth])
 
   return (
     <Row>

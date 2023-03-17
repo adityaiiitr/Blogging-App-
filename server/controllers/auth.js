@@ -202,3 +202,14 @@ exports.resetPassword = async (req, res) => {
     console.log(err);
   }
 };
+
+
+export const currentUser = async (req,res) =>{
+  try{
+    // const user = await User.findById(req.user._id);
+    res.json({ok:true}); // we just wanted to match the user role on server instead of local storage so this line will be executed if the middleware in routes return true
+  } catch(err){
+    console.log(err)
+  }
+
+}
