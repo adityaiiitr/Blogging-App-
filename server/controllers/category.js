@@ -14,3 +14,15 @@ export const create = async (req, res) => {
     console.log(err);
   }
 };
+
+//if the get doesnt find data in database then it will return an empty  array so less chance of error
+export const categories = async (req,res)=>{
+  try{
+    const categories = await Category.find().sort({createdAt:-1})
+    res.json(categories)
+
+
+  }catch(err){
+    console.log(err);
+  }
+}

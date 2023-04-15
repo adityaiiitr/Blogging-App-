@@ -175,3 +175,26 @@ next();
 console.log(err);
 }
 };
+
+# Category Page
+
+> Creating Routes for Category (inside category.js)
+
+<!-- //if the get doesnt find data in database then it will return an empty  array so less chance of error -->
+
+// Bring in all the data to frontend
+const [categories,setCategories]= useState([])
+useEffect(()=>{
+getCategories();
+},[])
+
+const getCategories=async()=>{
+try{
+const {data} = await axios.get('/categories');
+setCategories(data);
+}catch(err){
+console.log(err);
+}
+}
+
+> setCategories([data,...categories]); //order matters

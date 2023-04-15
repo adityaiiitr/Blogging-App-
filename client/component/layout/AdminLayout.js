@@ -24,14 +24,14 @@ function AdminLayout({children}){
         // else
         // setLoading(false)
       
-        getCurrentAdmin()
+        if(auth?.token) getCurrentAdmin()
 
         
       },[auth?.token])
 
       const getCurrentAdmin = async () =>{
         try{
-          const {data} = await axios.get("current-admin")
+          const {data} = await axios.get("/current-admin")
           // console.log(data)
           setLoading(false)
 
